@@ -1,2 +1,4 @@
-# c-coding
-c coding
+# Programming
+- C
+- Javascript
+- Python
