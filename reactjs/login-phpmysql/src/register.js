@@ -27,14 +27,30 @@ const Register=(props)=>{
         }
         console.log(sendData);
 
-        axios.post('http://localhost/react-php/insert.php',sendData)
-        .then((result)=>{
-            if(result.data.status === 'invalid') {
+        const deptsURL = "http://localhost/react-php/insert.php";
+        var vAttributes = {};
+        vAttributes = {
+            first_name:data.first_name,
+            last_name:data.last_name,
+            email:data.email,
+            password:data.password
+        };
+        const ops = {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            data: JSON.stringify(vAttributes) ,
+            url: deptsURL
+        };
+        axios( ops).then((res) => {
+            console.log("post response: " + JSON.stringify(res.data));
+            if(res.data.status === 'invalid') {
                 alert('Invalid User');
             } else {
                 history('./dashboard');
             }
-        })
+        }).catch(function (error) {
+            console.log("post error: " + error);
+        });
     }
 
     return(
@@ -47,35 +63,28 @@ const Register=(props)=>{
             <div className="row">
                 <div className="col-md-6">First Name</div>
                 <div className="col-md-6">
-                    <input type="text" name="first_name" className="form-control"
-                        onChange={handleChange} value={data.first_name}
-                    />
+                    <input type="text" name="first_name" className="form-control"/>
                 </div>
             </div>
 
             <div className="row">
                 <div className="col-md-6">Last Name</div>
                 <div className="col-md-6">
-                    <input type="text" name="last_name" className="form-control"
-                    onChange={handleChange} value={data.last_name} />
+                    <input type="text" name="last_name" className="form-control"/>
                 </div>
             </div>
 
             <div className="row">
                 <div className="col-md-6">Email</div>
                 <div className="col-md-6">
-                    <input type="email" name="email" className="form-control" 
-                        onChange={handleChange} value={data.email}
-                    />
+                    <input type="email" name="email" className="form-control"/>
                 </div>
             </div>
 
             <div className="row">
                 <div className="col-md-6">Password</div>
                 <div className="col-md-6">
-                    <input type="password" name="password" className="form-control" 
-                        onChange={handleChange} value={data.password}
-                    />
+                    <input type="password" name="password" className="form-control"/>
                 </div>
             </div>
 

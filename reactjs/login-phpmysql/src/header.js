@@ -1,6 +1,32 @@
-import { BrowserRouter as Router,Routes, Route, Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useState } from "react";
+import { BrowserRouter as Router,Routes, Route, Link, useNavigate } from 'react-router-dom';
 
-const header=()=>{
+const Header=()=>{
+
+  const [auth,setAuth]=useState('');
+  const [user,setUser]=useState('');
+  let navigate = useNavigate();
+
+  useEffect(()=>{
+    var auth = localStorage.getItem('email');
+    var userName = localStorage.getItem('userName');
+
+    if(auth === null) {
+      navigate('./login');
+    }
+
+    setAuth(auth);
+    setUser(userName);
+  },
+  [])
+
+  const LogOut = ()=>{
+    localStorage.removeItem('email');
+    localStorage.clear();
+    navigate('./login');
+  }
+
     return (
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
@@ -21,7 +47,7 @@ const header=()=>{
         </li>
       </ul>
       <span class="navbar-text">
-        Welcome
+        Welcome: {user} | <Link to='' onClick={LogOut}>LogOut</Link>
       </span>
     </div>
   </div>
@@ -29,4 +55,4 @@ const header=()=>{
     )
 }
 
-export default header;
+export default Header;
