@@ -45,6 +45,8 @@ const Register=(props)=>{
             console.log("post response: " + JSON.stringify(res.data));
             if(res.data.status === 'invalid') {
                 alert('Invalid User');
+            } else if(res.data.status === 202) {
+                alert('Use Already Exist');
             } else {
                 history('./dashboard');
             }
@@ -63,28 +65,36 @@ const Register=(props)=>{
             <div className="row">
                 <div className="col-md-6">First Name</div>
                 <div className="col-md-6">
-                    <input type="text" name="first_name" className="form-control"/>
+                    <input type="text" name="first_name" className="form-control"
+                        onChange={handleChange} value={data.first_name}
+                    />
                 </div>
             </div>
 
             <div className="row">
                 <div className="col-md-6">Last Name</div>
                 <div className="col-md-6">
-                    <input type="text" name="last_name" className="form-control"/>
+                    <input type="text" name="last_name" className="form-control"
+                        onChange={handleChange} value={data.last_name}
+                    />
                 </div>
             </div>
 
             <div className="row">
                 <div className="col-md-6">Email</div>
                 <div className="col-md-6">
-                    <input type="email" name="email" className="form-control"/>
+                    <input type="email" name="email" className="form-control"
+                        onChange={handleChange} value={data.email}
+                    />
                 </div>
             </div>
 
             <div className="row">
                 <div className="col-md-6">Password</div>
                 <div className="col-md-6">
-                    <input type="password" name="password" className="form-control"/>
+                    <input type="password" name="password" className="form-control"
+                        onChange={handleChange} value={data.password}
+                    />
                 </div>
             </div>
 
